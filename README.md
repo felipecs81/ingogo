@@ -2,15 +2,20 @@
 
 Ingogo Flutter challenge app
 
-## Getting Started
+##Project Structure
 
-This project is a starting point for a Flutter application.
+The folder structure of this app is explained below:
 
-A few resources to get you started if this is your first Flutter project:
+- lib/data: Contains classes that access data remotely and also the repositories in which the API classes are injected and implement domain interfaces
+- lib/di: Contains the file with the dependency injection configuration
+- lib/domain: This folder contains the project's business rules as interfaces that are implemented by the data folder's classes, wrappers, models and use cases.
+- lib/helpers: Contains helper classes for different situations like remote calls, socket manipulation and mocks
+- lib/navigation: This folder contains the configuration files, routes and routers for the app's navigation system.
+- lib/presentation: In this module are located the screens, view models, adapters or any other type of component that is linked to the UI
+- lib/resources: This folder contains project resource files like styles, strings, colors etc.
+- lib/utils: In this folder are located utility classes for the app and UI.
+- lib/widgets: In this folder are located the custom widgets (components) of the project that will be used in the screens.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+##Production config
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- No additional config is necessary. Just need to to build the app in release mode.
