@@ -10,4 +10,6 @@ class Strings {
   static const author = "Author";
   static const description = "Description";
   static const title = "Title";
+  static const views = "Views";
+  static const votes = "Votes";
 }

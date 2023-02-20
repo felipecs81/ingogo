@@ -4,6 +4,9 @@ Ingogo Flutter challenge app
 
 ##Project Structure
 
+Architecture: CleanArch
+State manager: Provider
+
 The folder structure of this app is explained below:
 
 - lib/data: Contains classes that access data remotely and also the repositories in which the API classes are injected and implement domain interfaces
@@ -15,6 +18,12 @@ The folder structure of this app is explained below:
 - lib/resources: This folder contains project resource files like styles, strings, colors etc.
 - lib/utils: In this folder are located utility classes for the app and UI.
 - lib/widgets: In this folder are located the custom widgets (components) of the project that will be used in the screens.
+
+##Socket implementation (Native Android)
+
+- Socket events and method channel are located
+- SocketUtils is the class that handle websocket
+- The following dependency was used to implement websockets: org.java-websocket:Java-WebSocket
 
 ##Production config
 

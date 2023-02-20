@@ -47,9 +47,14 @@ class _ColorDetailsScreenState extends State<ColorDetailsScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(
                     vertical: Dimensions.defaultItemsDistance),
+                child: CustomRegularLabel('${Strings.views}: ${_colorModel?.numViews}'),
+              ),
+              CustomRegularLabel('${Strings.votes}: ${_colorModel?.numVotes}'),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: Dimensions.defaultItemsDistance),
                 child: Html(data: _colorModel?.description),
               ),
-
               _hasImage()
                   ? Image.network(_colorModel!.imageUrl!)
                   : const SizedBox(),

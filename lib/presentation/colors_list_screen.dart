@@ -151,7 +151,6 @@ class _ColorsListScreenState extends State<ColorsListScreen> with WidgetsBinding
     }
   }
 
-
   ColourListLayoutAlignment _getNextLayout() {
     switch (_nextLayout) {
       case ColourListLayoutAlignment.top:
@@ -164,7 +163,6 @@ class _ColorsListScreenState extends State<ColorsListScreen> with WidgetsBinding
         _nextLayout = ColourListLayoutAlignment.top;
         break;
     }
-
     return _nextLayout;
   }
 
@@ -194,17 +192,21 @@ class _ColorsListScreenState extends State<ColorsListScreen> with WidgetsBinding
 
   void _initSocket() {
     _socket.connectSocket(onMessage: (value) {
-      AppUtils.printInfo('Colour received $value');
-      List<ColorModel>? colourList = (jsonDecode(value) as List?)?.map((i) =>
-          ColorModel.fromJson(i)).toList();
-      if (colourList?.isNotEmpty == true) {
-        for (var element in colourList!) {
-          element.layout = _getNextLayout();
-        }
-        _viewModel.addColour(colourList);
-        _listLength.value = _viewModel.coloursList.length;
-      }
+      _handleSocketMessage(value);
     });
+  }
+
+  void _handleSocketMessage(dynamic value){
+    AppUtils.printInfo('Colour received $value');
+    List<ColorModel>? colourList = (jsonDecode(value) as List?)?.map((i) =>
+        ColorModel.fromJson(i)).toList();
+    if (colourList?.isNotEmpty == true) {
+      for (var element in colourList!) {
+        element.layout = _getNextLayout();
+      }
+      _viewModel.addColour(colourList);
+      _listLength.value = _viewModel.coloursList.length;
+    }
   }
 
   void _emmitEvent(List<ColorModel>? colours) {
