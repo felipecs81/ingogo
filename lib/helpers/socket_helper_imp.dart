@@ -1,32 +1,27 @@
+import 'package:flutter/services.dart';
 import 'package:ingogo/helpers/socket_helper.dart';
-import 'package:ingogo/utils/app_utils.dart';
-import 'package:web_socket_channel/io.dart';
 
 class SocketHelper implements ISocketHelper {
 
-  IOWebSocketChannel? _socket;
+  final platform = const MethodChannel('au.ingogo/channel');
+
+  final onSocketMessageEvent = const EventChannel('onSocketMessage');
 
   @override
   void connectSocket({required Function(dynamic) onMessage}) async {
-    _socket = IOWebSocketChannel.connect( Uri.parse('wss://ws.postman-echo.com/raw'));
-    _socket?.stream.listen((event) {
-      AppUtils.printInfo('Event received: $event');
-      onMessage(event);
-    });
+    //Setup listeners
+    onSocketMessageEvent.receiveBroadcastStream().listen(onMessage);
+    //Connect socket
+    await platform.invokeMethod('connectSocket');
   }
 
   @override
   void emit(dynamic data) {
-    if (_socket != null) {
-      _socket?.sink.add(data);
-      return;
-    }
-    AppUtils.printInfo('Chat is disconnected');
+    platform.invokeMethod('sendMessage', {"message": data});
   }
 
   @override
-  void disconnectSocket() {
-    _socket?.sink.close();
-    _socket = null;
+  void disconnectSocket() async {
+    await platform.invokeMethod('disconnectSocket');
   }
 }
